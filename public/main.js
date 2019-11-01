@@ -1,3 +1,22 @@
+let n = 1
+getPage.onclick = () => {
+    const request = new XMLHttpRequest()
+    request.open('GET', `/page${n + 1}`)
+    request.onreadystatechange = () => {
+        if (request.readyState === 4 && request.status === 200) {
+            const array = JSON.parse(request.response)
+            array.forEach(item => {
+                const li = document.createElement('li')
+                li.textContent = item.id
+                xxx.appendChild(li)
+            });
+            n += 1
+        }
+    }
+    request.send()
+}
+
+
 getJSON.onclick = () => {
     const request = new XMLHttpRequest()
     request.open('GET', '/5.json')
@@ -29,7 +48,7 @@ getXML.onclick = () => {
 
 getHTML.onclick = () => {
     const request = new XMLHttpRequest()
-    request.open('GET', '/3.htm')
+    request.open('GET', '/3.html')
     request.onload = () => {
         const div = document.createElement('div')
         div.innerHTML = request.response
